@@ -3,10 +3,10 @@ import { DialogBody, DialogContent, DialogFooter, DialogHeader } from "../../../
 import Button from "../../../components/button";
 import InputText from "../../../components/input-text";
 import Text from "../../../components/text";
-import type { Photo } from "../../photos/models/photo";
 import SelectCheckboxIllustration from "../../../assets/images/select-checkbox.svg?react";
 import Skeleton from "../../../components/skeleton";
 import PhotoImageSelectable from "../../photos/components/photo-image-selectable";
+import usePhotos from "../../photos/hook/use-photos";
 
 interface AlbumNewDialogProps {
     trigger: React.ReactNode
@@ -15,35 +15,7 @@ interface AlbumNewDialogProps {
 export default function AlbumNewDialog({
     trigger
 }: AlbumNewDialogProps) {
-    // Variable solely for mocking purposes
-    const isLoadingPhotos = false;
-    const photos: Photo[] = [
-        {
-            id: "123",
-            title: "Olá mundo!",
-            imageId: "...",
-            albums: [
-                {
-                    id: "natureza",
-                    title: "natureza"
-                },
-                {
-                    id: "casa",
-                    title: "casa"
-                },
-                {
-                    id: "viagem",
-                    title: "viagem"
-                }
-            ]
-        },
-        {
-            id: "321",
-            title: "HMM",
-            imageId: "...",
-            albums: []
-        }
-    ];
+    const { photos, isLoadingPhotos } = usePhotos();
 
     function handleTogglePhoto(selected: boolean, photoId: string) {
         console.log(selected, photoId)
@@ -73,7 +45,7 @@ export default function AlbumNewDialog({
                                 {photos.map((photo) => (
                                     <PhotoImageSelectable
                                         key={photo.id}
-                                        src={`/image/${photo.imageId}`}
+                                        src={`${import.meta.env.VITE_IMAGES_URL}/${photo.imageId}`}
                                         title={photo.title}
                                         imageClassName="w-20 h-20"
                                         onSelectImage={(selected) => handleTogglePhoto(selected, photo.id)}

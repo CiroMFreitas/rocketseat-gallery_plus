@@ -1,54 +1,24 @@
 import Container from "../components/container";
 import AlbumsFilter from "../contexts/albums/components/albums-filter";
+import useAlbums from "../contexts/albums/hooks/use-albums";
 import PhotosList from "../contexts/photos/components/photo-list";
+import usePhotos from "../contexts/photos/hook/use-photos";
 
 export default function PageHome() {
+    const { albums, isLoadingAlbums } = useAlbums();
+    const { photos, isLoadingPhotos } = usePhotos();
+
     return (
         <Container className="grid gap-6">
-            <AlbumsFilter albums={[
-                { id: "natureza", title: "natureza" },
-                { id: "casa", title: "casa" },
-                { id: "viagem", title: "viagem" },
-                { id: "noite", title: "noite" }
-            ]} className="mb-9" loading />
-
-            <PhotosList
-                photos={[
-                    {
-                        id: "123",
-                        title: "Olá mundo!",
-                        imageId: "...",
-                        albums: [
-                            {
-                                id: "natureza",
-                                title: "natureza"
-                            },
-                            {
-                                id: "casa",
-                                title: "casa"
-                            },
-                            {
-                                id: "viagem",
-                                title: "viagem"
-                            }
-                        ]
-                    },
-                    {
-                        id: "321",
-                        title: "HMM",
-                        imageId: "...",
-                        albums: []
-                    }
-                ]}
+            <AlbumsFilter
+                className="mb-9"
+                albums={albums}
+                loading={isLoadingAlbums}
             />
 
             <PhotosList
-                photos={[]}
-                loading
-            />
-
-            <PhotosList
-                photos={[]}
+                photos={photos}
+                loading={isLoadingPhotos}
             />
         </Container>
     );

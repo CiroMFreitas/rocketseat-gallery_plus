@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import useAlbums from "../../albums/hooks/use-albums";
 import { photoNewFormSchema, type PhotoNewFormSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import React from "react";
 
 interface PhotoNewDialogProps {
     trigger: React.ReactNode;
@@ -19,6 +20,7 @@ interface PhotoNewDialogProps {
 export default function PhotoNewDialog({
     trigger
 }: PhotoNewDialogProps) {
+    const [modalOpen, setModalOpen] = React.useState(false);
     const form = useForm<PhotoNewFormSchema>({
         resolver: zodResolver(photoNewFormSchema)
     });
@@ -27,12 +29,18 @@ export default function PhotoNewDialog({
     const file = form.watch("file");
     const fileSource = file?.[0] ? URL.createObjectURL(file[0]) : undefined;
 
+    React.useEffect(() => {
+        if (!modalOpen) {
+            form.reset();
+        }
+    }, [modalOpen, form])
+
     function handleSubmit(payload: PhotoNewFormSchema) {
         console.log(payload)
     }
 
     return (
-        <Dialog>
+        <Dialog open={modalOpen} onOpenChange={setModalOpen}>
             <DialogTrigger asChild>
                 {trigger}
             </DialogTrigger>

@@ -1,5 +1,52 @@
 {
-  "photos": [],
-  "albums": [],
-  "photosOnAlbums": []
+  "photos": [
+    {
+      "id": "1b9146a2-13e7-4f81-9127-296af80de9bf",
+      "title": "Grounded Defense Buff",
+      "albumsIds": [],
+      "imageId": "94aa9a0f-3b24-465e-aa6e-92b83e8553f9.png"
+    },
+    {
+      "id": "c799cf26-5e1b-4083-b50e-c3533a056157",
+      "title": "Precision Mark",
+      "albumsIds": [],
+      "imageId": "407e72b0-7186-4ce7-bf53-8bf7c684ad88.png"
+    },
+    {
+      "id": "a5f53978-237b-4973-ac3f-670ad01f8c63",
+      "title": "Steadfast-Buff",
+      "albumsIds": [],
+      "imageId": "0feb3122-98cd-49be-b450-d6d8e74a6fa8.png"
+    },
+    {
+      "id": "f82dc983-f7a7-4c04-b547-23380571bc42",
+      "title": "Shred Mark",
+      "albumsIds": [],
+      "imageId": "ae52ddf0-319d-478d-8cb8-b699a8e1721b.png"
+    },
+    {
+      "id": "1817083c-ba1d-449e-b6b8-7c7b63844462",
+      "title": "Fortified Growth",
+      "albumsIds": [],
+      "imageId": "2f585ee0-5177-4616-9a65-f2f1b6078520.png"
+    }
+  ],
+  "albums": [
+    {
+      "id": "a16cde33-a42a-400e-98e2-a7fa53a14ebf",
+      "title": "Icons"
+    },
+    {
+      "id": "c3fc6d1b-1bb9-40ff-bd95-99a5caa4152d",
+      "title": "Buffs"
+    },
+    {
+      "id": "5f578a48-29de-4ec0-8210-bc1588376a4a",
+      "title": "Marks"
+    },
+    {
+      "id": "781b8ddc-e35e-425d-a019-a6bfae941937",
+      "title": "Growths"
+    }
+  ]
 }

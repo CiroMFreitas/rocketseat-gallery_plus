@@ -9,6 +9,8 @@ import Text from "../../../components/text";
 import Skeleton from "../../../components/skeleton";
 import { useForm } from "react-hook-form";
 import useAlbums from "../../albums/hooks/use-albums";
+import { photoNewFormSchema, type PhotoNewFormSchema } from "../schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface PhotoNewDialogProps {
     trigger: React.ReactNode;
@@ -17,8 +19,17 @@ interface PhotoNewDialogProps {
 export default function PhotoNewDialog({
     trigger
 }: PhotoNewDialogProps) {
-    const form = useForm();
+    const form = useForm<PhotoNewFormSchema>({
+        resolver: zodResolver(photoNewFormSchema)
+    });
     const { albums, isLoadingAlbums } = useAlbums();
+
+    const file = form.watch("file");
+    const fileSource = file?.[0] ? URL.createObjectURL(file[0]) : undefined;
+
+    function handleSubmit(payload: PhotoNewFormSchema) {
+        console.log(payload)
+    }
 
     return (
         <Dialog>
@@ -27,73 +38,80 @@ export default function PhotoNewDialog({
             </DialogTrigger>
 
             <DialogContent>
-                <DialogHeader>
-                    Adicionar foto
-                </DialogHeader>
+                <form onSubmit={form.handleSubmit(handleSubmit)}>
+                    <DialogHeader>
+                        Adicionar foto
+                    </DialogHeader>
 
-                <DialogBody className="flex flex-col gap-5">
-                    <InputText
-                        placeholder="Adcione um titulo"
-                        maxLength={255}
-                    />
+                    <DialogBody className="flex flex-col gap-5">
+                        <InputText
+                            placeholder="Adcione um titulo"
+                            maxLength={255}
+                            error={form.formState.errors.tittle?.message}
+                            {...form.register("tittle")}
+                        />
 
-                    <Alert>
-                        Tamanho máximo: 50MB
+                        <Alert>
+                            Tamanho máximo: 50MB
 
-                        <br />
+                            <br />
 
-                        Você pode selecionar arquivos em PNG, JPG ou JPEG
-                    </Alert>
+                            Você pode selecionar arquivos em PNG, JPG ou JPEG
+                        </Alert>
 
-                    <InputSingleFile
-                        form={form}
-                        allowedExtensions={["png", "jpg", "jpeg"]}
-                        maxFileSizeInMB={50}
-                        replaceBy={
-                            <ImagePreview
-                                className="w-full h-56"
-                            />
-                        }
-                    />
-
-                    <div className="space-y-3">
-                        <Text variant="label-small">
-                            Selecionar albuns
-                        </Text>
-
-                        <div className="flex flex-wrap gap-3">
-                            {!isLoadingAlbums && albums.length > 0 && albums.map((album) => (
-                                <Button
-                                    key={album.id}
-                                    variant="ghost"
-                                    size="sm"
-                                    className="truncate"
-                                >
-                                    {album.title}
-                                </Button>
-                            ))}
-
-                            {isLoadingAlbums && Array.from({ length: 5 }).map((_, index) => (
-                                <Skeleton
-                                    key={`album-loading-${index}`}
-                                    className="w-20 h-7"
+                        <InputSingleFile
+                            form={form}
+                            allowedExtensions={["png", "jpg", "jpeg"]}
+                            maxFileSizeInMB={50}
+                            replaceBy={
+                                <ImagePreview
+                                    className="w-full h-56"
+                                    src={fileSource}
                                 />
-                            ))}
+                            }
+                            error={form.formState.errors.file?.message}
+                            {...form.register("file")}
+                        />
+
+                        <div className="space-y-3">
+                            <Text variant="label-small">
+                                Selecionar albuns
+                            </Text>
+
+                            <div className="flex flex-wrap gap-3">
+                                {!isLoadingAlbums && albums.length > 0 && albums.map((album) => (
+                                    <Button
+                                        key={album.id}
+                                        variant="ghost"
+                                        size="sm"
+                                        className="truncate"
+                                    >
+                                        {album.title}
+                                    </Button>
+                                ))}
+
+                                {isLoadingAlbums && Array.from({ length: 5 }).map((_, index) => (
+                                    <Skeleton
+                                        key={`album-loading-${index}`}
+                                        className="w-20 h-7"
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </DialogBody>
+                    </DialogBody>
 
-                <DialogFooter>
-                    <DialogClose asChild>
-                        <Button variant="secondary">
-                            Cancelar
+                    <DialogFooter>
+                        <DialogClose asChild>
+                            <Button variant="secondary">
+                                Cancelar
+                            </Button>
+                        </DialogClose>
+
+                        <Button type="submit">
+                            Adcionar
                         </Button>
-                    </DialogClose>
-
-                    <Button>
-                        Adcionar
-                    </Button>
-                </DialogFooter>
+                    </DialogFooter>
+                </form>
             </DialogContent>
         </Dialog>
     );

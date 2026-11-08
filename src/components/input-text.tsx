@@ -76,7 +76,7 @@ export default function InputText({
             </div>
 
             {error && <Text variant="label-small" className="text-accent-red">
-                Um erro no campo.
+                {error}
             </Text>}
         </div>
     );

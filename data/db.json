@@ -35,6 +35,12 @@
       "title": "Piercing Frenzy",
       "albumsIds": [],
       "imageId": "43d435fd-e500-4c10-a6c6-e9057887b979.png"
+    },
+    {
+      "id": "537fe78e-106d-4fee-ad9f-1da3807c0f07",
+      "title": "Precision Frenzy",
+      "albumsIds": [],
+      "imageId": "fb19590e-032e-4ea5-991f-5d46b25e1ef1.png"
     }
   ],
   "albums": [
@@ -55,10 +61,13 @@
       "title": "Growths"
     }
   ],
-  "photosOnAlbums": []
   "photosOnAlbums": [
     {
       "photoId": "c15eb180-d445-4c05-8efa-fde48ddbbaa5",
+      "albumId": "a16cde33-a42a-400e-98e2-a7fa53a14ebf"
+    },
+    {
+      "photoId": "537fe78e-106d-4fee-ad9f-1da3807c0f07",
       "albumId": "a16cde33-a42a-400e-98e2-a7fa53a14ebf"
     }
   ]

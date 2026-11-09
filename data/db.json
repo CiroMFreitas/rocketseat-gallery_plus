@@ -29,6 +29,12 @@
       "title": "Fortified Growth",
       "albumsIds": [],
       "imageId": "2f585ee0-5177-4616-9a65-f2f1b6078520.png"
+    },
+    {
+      "id": "c15eb180-d445-4c05-8efa-fde48ddbbaa5",
+      "title": "Piercing Frenzy",
+      "albumsIds": [],
+      "imageId": "43d435fd-e500-4c10-a6c6-e9057887b979.png"
     }
   ],
   "albums": [
@@ -50,4 +56,10 @@
     }
   ],
   "photosOnAlbums": []
+  "photosOnAlbums": [
+    {
+      "photoId": "c15eb180-d445-4c05-8efa-fde48ddbbaa5",
+      "albumId": "a16cde33-a42a-400e-98e2-a7fa53a14ebf"
+    }
+  ]
 }
